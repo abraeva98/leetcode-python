@@ -1,0 +1,9 @@
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        next_good_idx = 0
+        for idx, num in enumerate(nums):
+            if(num != val):
+                nums[next_good_idx] = nums[idx]
+                next_good_idx += 1
+        
+        return next_good_idx
