@@ -1,0 +1,12 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        is_subsequence = False
+        sequence_idx = 0
+
+        for letter in t:
+            if(sequence_idx == len(s)):
+                return(True)
+            if(letter == s[sequence_idx]):
+                sequence_idx += 1
+            
+        return(sequence_idx == len(s))
