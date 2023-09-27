@@ -1,0 +1,23 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        mapper = {}
+        mapper_match = {}
+        s = s.split(" ")
+        if(len(s) != len(pattern)):
+            return False
+
+        for i in range(len(s)):
+            first_letter = s[i]
+            match = pattern[i]
+            if not first_letter in mapper:
+                mapper[first_letter] = match
+            if not match in mapper_match:
+                mapper_match[match] = first_letter
+        
+        for i in range(len(s)):
+            first_letter = s[i]
+            match = pattern[i]
+            if mapper.get(first_letter) != match or mapper_match.get(match) != first_letter:
+                return False
+
+        return True
