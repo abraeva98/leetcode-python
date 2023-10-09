@@ -1,0 +1,9 @@
+class NumArray:
+    def __init__(self, nums: List[int]):
+        self.total_sum = [nums[0]]
+        for i in range(1, len(nums)):
+            self.total_sum.append(self.total_sum[i - 1] + nums[i])
+
+    def sumRange(self, left: int, right: int) -> int:
+        start = 0 if left == 0 else self.total_sum[left - 1]
+        return(self.total_sum[right] - start)
