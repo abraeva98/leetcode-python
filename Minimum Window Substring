@@ -1,0 +1,32 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        map_let = {}
+        for letter in t:
+            map_let[letter] = map_let.get(letter, 0) + 1
+        
+        left, right = 0, 0
+        res = [-1, -1]
+        min_len = float("inf")
+        count = len(map_let)
+        temp = map_let.copy() 
+
+        while right < len(s):
+            curr = s[right]
+            if curr in map_let:
+                temp[curr] = temp.get(curr) - 1
+                if temp.get(curr) == 0:
+                    count -= 1
+                    
+            while count == 0:
+                if right - left < min_len:
+                    min_len = right - left
+                    res[0], res[1] = left, right
+                if s[left] in map_let:
+                    temp[s[left]] = temp.get(s[left]) + 1
+                    if temp.get(s[left]) > 0:
+                        count += 1
+                left += 1
+
+            right += 1
+
+        return s[res[0]:res[1] + 1]
