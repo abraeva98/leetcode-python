@@ -1,0 +1,25 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        res = []
+        if len(p) > len(s):
+            return res
+        reference = {}
+        for letter in p:
+            reference[letter] = reference.get(letter, 0) + 1
+        sliding_window = {}
+        for i in range(len(p)):
+            sliding_window[s[i]] = sliding_window.get(s[i], 0) + 1
+        left, right = 0, len(p)
+
+        while right < len(s):
+            if sliding_window == reference:
+                res.append(left)
+            sliding_window[s[right]] = sliding_window.get(s[right], 0) + 1
+            sliding_window[s[left]] = sliding_window.get(s[left]) - 1
+            if sliding_window[s[left]] == 0:
+                del sliding_window[s[left]]
+            right += 1
+            left += 1
+        if sliding_window == reference:
+                res.append(left)    
+        return res
