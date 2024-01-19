@@ -1,0 +1,15 @@
+class Solution:
+    def helper(start, end, s):
+        if start >= end:
+            return
+        temp = s[end]
+        s[end] = s[start]
+        s[start] = temp
+
+        Solution.helper(start + 1, end - 1, s) 
+        
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        Solution.helper(0, len(s) - 1, s)
