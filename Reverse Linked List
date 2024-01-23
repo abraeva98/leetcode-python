@@ -1,0 +1,9 @@
+class Solution:
+    def reverseList(self, head: Optional[ListNode], prev = None) -> Optional[ListNode]:
+        if not head.next:
+            return null
+        if prev is None:
+            self.reverseList(head, head.next)
+        curr = head
+        curr.next = prev
+        return
