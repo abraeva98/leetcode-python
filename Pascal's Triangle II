@@ -1,0 +1,16 @@
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        res = []
+        for i in range(rowIndex + 1):
+            res.append(self.recurse(rowIndex, i, {}))
+        return res
+    
+    def recurse(self, rowIdx: int, colIdx: int, memo):
+        if rowIdx == 0 or colIdx == 0 or colIdx == rowIdx:
+            return 1
+        location = str(rowIdx) + str(colIdx)
+        if location in memo:
+            return memo[location]
+        cachedVal = self.recurse(rowIdx - 1, colIdx - 1, memo) + self.recurse(rowIdx - 1, colIdx, memo)
+        memo[location] = cachedVal
+        return cachedVal
