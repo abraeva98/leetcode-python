@@ -1,0 +1,14 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        return self.helper(n, {})
+    
+    def helper(self, numStairs, cache):
+        if numStairs in cache:
+            return cache[numStairs]
+        if numStairs < 3:
+            return numStairs
+        oneStep = self.helper(numStairs - 1, cache)
+        twoStep = self.helper(numStairs - 2, cache)
+        cache[numStairs] = oneStep + twoStep
+        return cache[numStairs]
+        
