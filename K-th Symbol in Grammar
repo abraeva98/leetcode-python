@@ -1,0 +1,12 @@
+class Solution:
+    def kthGrammar(self, n: int, k: int, finalNode = 0 ) -> int:
+        if n == 1:
+            return finalNode
+        numNodes = 2 ** ( n - 1 )
+
+        if numNodes / 2 < k :
+            nextRoot = 1 if finalNode == 0 else 0
+            return self.kthGrammar(n - 1, k - numNodes / 2, nextRoot )
+        else:
+            nextRoot = 0 if finalNode == 0 else 1
+            return self.kthGrammar(n - 1, k, nextRoot )
