@@ -1,0 +1,16 @@
+class Solution:
+    def calculateTax(self, brackets: List[List[int]], income: int) -> float:
+        tax = 0
+        money = income
+        prev = 0
+        for i in range(len(brackets)):
+            bracket = brackets[i][0] - prev
+            if bracket <= money:
+                tax = tax + bracket * brackets[i][1] / 100
+                money = money - bracket
+                prev = brackets[i][0]
+            else:
+                tax = tax + money * brackets[i][1] / 100
+                break
+            
+        return tax
