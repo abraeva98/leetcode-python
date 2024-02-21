@@ -10,3 +10,17 @@ class Solution:
             res += temp
         return res
         
+class Solution:
+    def subsets(self, nums: List[int], res = [[]]) -> List[List[int]]:
+        res = []
+        
+        def backtrack(i, curr):
+            res.append(curr)
+            for idx in range(i, len(nums)):
+                curr.append(nums[idx])
+                print("before", curr)
+                backtrack(idx + 1, curr[:])
+                print("after", curr)
+                curr.pop()
+        backtrack(0, [])
+        return res
