@@ -1,0 +1,19 @@
+class Solution:
+    def mergeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        sumListHead = ListNode()
+        sumList = sumListHead
+        currSum = 0
+        seenNodes = 0
+        head = head.next
+        while head != None:
+            if head.val == 0:
+                sumList.next = ListNode(currSum)
+                sumList = sumList.next
+                currSum = 0
+                seenNodes = 0
+            else:
+                currSum += head.val
+                seenNodes += 1
+            head = head.next
+        
+        return sumListHead.next
