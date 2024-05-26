@@ -1,0 +1,13 @@
+class Solution:
+    def addSpaces(self, s: str, spaces: List[int]) -> str:
+        final = []
+        spaceIdx = 0
+        idxMovedBy = 0
+        for index in range(len(s)):
+            if spaceIdx < len(spaces) and index == spaces[spaceIdx]:
+                final.append(" ")
+                final.append(s[index])
+                spaceIdx += 1
+            else:
+                final.append(s[index])
+        return "".join(final)
