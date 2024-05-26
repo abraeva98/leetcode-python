@@ -1,0 +1,14 @@
+class Solution:
+    def countElements(self, nums: List[int]) -> int:
+        minNum = float('inf')
+        maxNum = float('-inf')
+        for num in nums:
+            minNum = min(num, minNum)
+            maxNum = max(num, maxNum)
+        
+        removeCount = 0
+        for num in nums:
+            if num == minNum or num == maxNum:
+                removeCount += 1
+                
+        return len(nums) - removeCount
