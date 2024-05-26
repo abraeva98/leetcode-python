@@ -1,0 +1,12 @@
+class Solution:
+    def minimumCost(self, cost: List[int]) -> int:
+        cost.sort(reverse=True)
+        minCost = 0
+        paidCandy = 0
+        for idx in range(len(cost)):
+            paidCandy += 1
+            if paidCandy == 3:
+                paidCandy = 0
+                continue
+            minCost += cost[idx]
+        return minCost
