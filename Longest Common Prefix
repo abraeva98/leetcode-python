@@ -1,0 +1,15 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        shortestWord = min(strs, key=len)
+        prefix = []
+
+        for i in range(len(shortestWord)):
+            for j in range(len(strs)):
+                if j == 0:
+                    prefix.append(strs[j][i])
+                else:
+                    if prefix[-1] != strs[j][i]:
+                        return longestPrefix
+            
+        
+        return longestPrefix
