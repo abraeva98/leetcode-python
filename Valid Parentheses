@@ -1,0 +1,23 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s) < 2:
+            return False
+        stack = []
+        matchParentheses = { ")": "(", "]":"[", "}":"{"}
+
+        for parenthesis in s:
+            if parenthesis in matchParentheses:
+                openingParenthesis = matchParentheses[parenthesis]
+                if len(stack) == 0:
+                    return False
+                else:
+                    if openingParenthesis != stack[-1]:
+                        return False
+                    else:
+                        stack.pop()
+            else:
+                stack.append(parenthesis)
+        
+        return len(stack) == 0
+                
+        
