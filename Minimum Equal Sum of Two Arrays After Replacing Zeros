@@ -12,6 +12,36 @@ class Solution:
             return nums1SumWithZero
 
         if nums1Sum < nums2Sum:
+            return self.helper(nums1SumWithZero, nums2SumWithZero, nums1Zeros, nums2Zeros)
+        else:
+            return self.helper(nums2SumWithZero, nums1SumWithZero, nums2Zeros, nums1Zeros)
+
+    def helper(self, nums1SumWithZero, nums2SumWithZero, nums1Zeros, nums2Zeros) -> int:
+            if nums1SumWithZero < nums2SumWithZero:
+                if nums1Zeros > 0:
+                   return nums2SumWithZero
+                else:
+                    return -1
+            else:
+                if nums2Zeros > 0:
+                    return nums1SumWithZero
+                else:
+                    return -1
+
+class Solution:
+    def minSum(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1Sum = sum(nums1)
+        nums1Zeros = nums1.count(0)
+
+        nums2Sum = sum(nums2)
+        nums2Zeros = nums2.count(0)
+
+        nums1SumWithZero = nums1Sum + nums1Zeros
+        nums2SumWithZero = nums2Sum + nums2Zeros
+        if nums1SumWithZero == nums2SumWithZero:
+            return nums1SumWithZero
+
+        if nums1Sum < nums2Sum:
             if nums1SumWithZero < nums2SumWithZero:
                 if nums1Zeros > 0:
                    return nums2SumWithZero
