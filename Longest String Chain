@@ -1,0 +1,27 @@
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        words.sort(key=len, reverse=True)
+        self.maxLength = float("-inf")
+        self.uniqueSet = set(words)
+        self.memo = {}
+
+        for word in words:
+            self.helper(word, 1)
+
+        return self.maxLength
+        
+
+
+    def helper(self, word, length):
+        if word in self.memo:
+            self.maxLength = max(self.memo[word], self.maxLength)
+            return
+
+        for i in range(len(word)):
+            substring = word[:i] + word[i + 1:]
+            if substring in self.uniqueSet:
+                print(substring)
+                self.helper(substring, length + 1)
+        
+        self.memo[word] = length
+        self.maxLength = max(self.maxLength, length)
