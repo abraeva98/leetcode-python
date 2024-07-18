@@ -1,0 +1,22 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stock = []
+        operators = {"+" : lambda x, y: x + y, 
+                     "-" : lambda x, y: x - y,
+                     "*" : lambda x, y: x * y, 
+                     "/" : lambda x, y: x / y}
+
+        for token in tokens:
+            if token in operators:
+                second = stock.pop()
+                first = stock.pop()
+                value = operators[token](first, second)
+                if value < 0:
+                    value = math.ceil(value)
+                else:
+                    value = math.floor(value)
+                stock.append(value)
+            else:
+                stock.append(int(token))
+
+        return stock.pop()
