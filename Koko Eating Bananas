@@ -1,0 +1,16 @@
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        maxTime = max(piles)
+        minTime = 1
+        minSpeedPerHour = maxTime
+
+        while minTime < maxTime:
+            avg = (minTime + maxTime) // 2
+            currSum = sum([math.ceil(banana / avg) for banana in piles])
+            if currSum > h:
+                minTime = avg + 1
+            else:
+                maxTime = avg
+                minSpeedPerHour = min(minSpeedPerHour, avg)
+ 
+        return minSpeedPerHour
