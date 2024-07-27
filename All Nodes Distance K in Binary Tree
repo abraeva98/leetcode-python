@@ -1,0 +1,25 @@
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        self.addParent(root, None)
+        res = []
+        visited = set()
+        def findInK(curr, depth):
+            if not curr or curr in visited:
+                return
+            visited.add(curr)
+            if depth == k:
+                res.append(curr.val)
+                return
+            findInK(curr.left, depth + 1)
+            findInK(curr.right, depth + 1)
+            findInK(curr.prev, depth + 1)
+
+        findInK(target, 0)
+
+        return res
+    
+    def addParent(self, curr, parent):
+        if curr:
+            curr.prev = parent
+            self.addParent(curr.left, curr)
+            self.addParent(curr.right, curr)
