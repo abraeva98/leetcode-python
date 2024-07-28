@@ -1,0 +1,12 @@
+class Solution:
+    def findLength(self, nums1: List[int], nums2: List[int]) -> int:
+        # create a memo matrix where nums1 is a column and nums2 is a row
+        # loop through nums1 and create the second for loop that checks if 
+        # nums1[i] and nums2[j] are the same, if so check if prev nums were same
+        matrix = [[0] * (len(nums1) + 1) for _ in range(len(nums2) + 1)]
+
+        for row, rowVal in enumerate(nums2):
+            for col, colVal in enumerate(nums1):
+                if rowVal == colVal:
+                    matrix[row][col] = matrix[row - 1][col - 1] + 1
+        return max(max(row) for row in matrix)
