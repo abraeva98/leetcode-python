@@ -1,0 +1,15 @@
+class Solution:
+    def firstCompleteIndex(self, arr: List[int], mat: List[List[int]]) -> int:
+        mapper = {k:v for v, k in enumerate(arr)}
+        
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                mat[i][j] = mapper[mat[i][j]]
+
+        minRow = min(max(row) for row in mat)
+        minColumn = float("inf")
+
+        for colIdx in range(len(mat[0])):
+            minColumn = min(minColumn, max([line[colIdx] for line in mat]))
+
+        return min(minRow, minColumn)
