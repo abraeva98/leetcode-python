@@ -1,0 +1,12 @@
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        difference = []
+
+        for num in arr:
+            heapq.heappush(difference, (abs(x - num), num))
+  
+        result = []
+        for _ in range(k):
+            result.append(heapq.heappop(difference)[1])
+
+        return sorted(result)
