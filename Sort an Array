@@ -1,0 +1,31 @@
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        return self.sort(nums)
+        
+    def sort(self, nums: List[int]) -> List[int]:
+        if len(nums) == 1:
+            return nums
+        mid = len(nums) // 2
+        left = self.sort(nums[0: mid])
+        right = self.sort(nums[mid:])
+        return merge(left, right)
+
+    def merge(self, left: List[int], right: List[int]) -> List[int]:
+        res = []
+        leftIdx = 0
+        rigthIdx = 0
+
+        while leftIdx < len(left) and rightIdx < len(right):
+            if left[leftIdx] < right[rightIdx]:
+                res.append(left[leftIdx])
+                leftIdx += 1
+            else:
+                res.append(right[rightIdx])
+                rigthIdx += 1
+        
+        if leftId == len(left):
+            res.concat(right[rightIdx:])
+        else:
+            res.concat(left[leftIdx:])
+        
+        return res
