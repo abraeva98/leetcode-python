@@ -1,0 +1,16 @@
+class Solution:
+    def minimumAddedCoins(self, coins: List[int], target: int) -> int:
+        res = 0        
+        maxRange = 0
+        i = 0
+        coins.sort()
+
+        while maxRange < target:
+            if i < len(coins) and coins[i] <= maxRange + 1:
+                maxRange += coins[i]
+                i += 1
+            else:
+                maxRange += maxRange + 1
+                res += 1
+        
+        return res
