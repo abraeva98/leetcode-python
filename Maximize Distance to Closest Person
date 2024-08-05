@@ -1,0 +1,38 @@
+class Solution:
+    def maxDistToClosest(self, seats: List[int]) -> int:
+        """
+            [0, 0, 0, 0, 4, 4, 6] - neighbors on the left
+            [0, 4, 4, 4, 4, 6, 6] - neighbors on the right
+            distance curr - left and curr - right get max of two
+        """        
+        n = len(seats)
+        left_neighbors = [0] * n
+
+        for idx, seat in enumerate(seats):
+            if seats[idx] == 0:
+                if idx != 0:
+                    left_neighbors[idx] = left_neighbors[idx - 1]
+            else:
+                left_neighbors[idx] = idx
+        
+        right_neighbors = [0] * n
+        for i in range(n - 1, -1, -1):
+            if seats[i] == 0:
+                if i != n - 1:
+                    right_neighbors[i] = right_neighbors[i + 1]
+            else:
+                right_neighbors[i] = i
+        
+        maxDistance = float('-inf')
+        
+        for idx, position in enumerate(seats):
+            if position == 0:
+                if idx == 0:
+                    currMax = abs(right_neighbors[idx] - idx)
+                elif idx == n - 1:
+                    currMax = abs(left_neighbors[idx] - idx)
+                else:
+                    currMax = min(abs(left_neighbors[idx] - idx), abs(right_neighbors[idx] - idx))
+                maxDistance = max(maxDistance, currMax)
+        
+        return maxDistance
