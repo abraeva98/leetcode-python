@@ -1,0 +1,18 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        mapper_t_to_s = {}
+        mapper_s_to_t = {}
+
+        for i in range(len(s)):
+            t_letter = t[i]
+            s_letter = s[i]
+            if s_letter in mapper_s_to_t:
+                if mapper_s_to_t[s_letter] != t_letter:
+                    return False
+            if t_letter in mapper_t_to_s:
+                if mapper_t_to_s[t_letter] != s_letter:
+                    return False
+            mapper_t_to_s[t_letter] = s_letter
+            mapper_s_to_t[s_letter] = t_letter
+
+        return True
