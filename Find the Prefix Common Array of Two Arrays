@@ -1,0 +1,36 @@
+class Solution:
+    def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        """
+            [1, 3, 2, 4]
+            [3, 1, 2, 4]
+        
+            idx = 0
+            sets are empty -> 0
+            a_set = {1}
+            b_set = {3}
+
+            idx = 1
+            if b_val in a_set common += 1
+            if a_val in b_set common += 1
+
+        """
+        n = len(A)
+        common_prefix = [0] * n
+        a_set = set()
+        b_set = set()
+
+        for idx in range(n):
+            a_set.add(A[idx])
+            b_set.add(B[idx])
+
+            if A[idx] == B[idx]:
+                common_prefix[idx] = common_prefix[idx - 1] + 1
+                continue
+            prefixCount = 0
+            if A[idx] in b_set:
+                prefixCount += 1
+            if B[idx] in a_set:
+                prefixCount += 1
+            common_prefix[idx] = common_prefix[idx - 1] + prefixCount
+
+        return common_prefix
