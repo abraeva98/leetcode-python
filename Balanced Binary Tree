@@ -1,0 +1,15 @@
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        return self.dfs(root) != -1
+    
+    def dfs(self, node: Optional[TreeNode]) -> int:
+        if node == None:
+            return 0
+        left = self.dfs(node.left)
+        right = self.dfs(node.right)
+        print(f'node - {node.val}, left - {left}')
+        print(f'node - {node.val}, right - {right}')
+        if left == -1 or right == -1 or abs(left - right) > 1:
+            return -1
+
+        return max(left, right) + 1
