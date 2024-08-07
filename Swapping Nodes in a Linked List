@@ -1,0 +1,21 @@
+class Solution:
+    def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        count = 0
+        slow = None
+        fast = head
+        front_k = head
+
+        while fast is not None:
+            count += 1
+            if slow is not None:
+                slow = slow.next
+            if count == k:
+                front_k = fast
+                slow = head
+            fast = fast.next
+            
+        temp = front_k.val
+        front_k.val = slow.val
+        slow.val = temp
+
+        return head
