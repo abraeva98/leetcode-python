@@ -1,0 +1,25 @@
+from collections import defaultdict, Counter
+import itertools
+
+class Solution:
+    def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
+        user_activity = defaultdict(list)
+
+        for u, t, w in sorted(zip(username, timestamp, website)):
+            user_activity[u].append(w)
+        
+        counter = Counter()
+        for _, val in user_activity.items():
+            for triple in set(itertools.combinations(val, 3)):
+                counter[triple] += 1
+        
+        most_used_pattern, times_used = None, 0
+        for pattern, count in counter.items():
+            if count > times_used:
+                most_used_pattern = pattern
+                times_used = count
+            elif count == times_used and most_used_pattern > pattern:
+                most_used_pattern = pattern
+        
+        return most_used_pattern
+        
