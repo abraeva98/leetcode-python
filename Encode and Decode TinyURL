@@ -1,0 +1,28 @@
+class Codec:
+    def __init__(self):
+        self.long_to_short = {}
+        self.short_to_long = {}
+        self.base = "http://tinyurl.com/"
+        self.symbols = string.printable
+        self.symbols_size = len(self.symbols) - 1
+
+    def encode(self, longUrl: str, range_int: int = 6) -> str:
+        """Encodes a URL to a shortened URL.
+        """
+        encoded = []
+        for _ in range(range_int):
+            encoded.append(self.symbols[randint(0, self.symbols_size)])
+        string_encoded = "".join(encoded)
+        if string_encoded in self.short_to_long:
+            self.encode(longUrl, range_int + 1)
+        else:
+            self.long_to_short[longUrl] = self.base + string_encoded
+            self.short_to_long[self.base + string_encoded] = longUrl
+        return self.base + string_encoded
+        
+    def decode(self, shortUrl: str) -> str:
+        """Decodes a shortened URL to its original URL.
+        """
+        if shortUrl not in self.short_to_long:
+            return ""
+        return self.short_to_long[shortUrl]
